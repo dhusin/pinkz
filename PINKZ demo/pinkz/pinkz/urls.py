@@ -1,4 +1,5 @@
 
+from argparse import Namespace
 import imp
 from xml.dom.minidom import Document
 from django.contrib import admin
@@ -6,6 +7,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+app_name = 'main'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

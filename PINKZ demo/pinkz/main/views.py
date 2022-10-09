@@ -1,4 +1,6 @@
 from http.client import HTTPResponse
+from optparse import Values
+from unicodedata import category
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.http import HttpResponse
@@ -13,10 +15,8 @@ def productDetail(request, id):
     context = {'product' : Product.objects.get(productId = id)}
     return render(request,'product-detail.html',context)
 
-class HomeView(ListView):
-    model = Product
-    template_name = 'home.html'
+def productsList(request):
+    print(Product.get_category_products("Toys&Gifts"))
+    return render(request,'product.html')
 
-class ProductDetailVIew(DetailView):
-    model = Product
-    template_name = 'product-detail.html'
+
