@@ -8,7 +8,7 @@ from django.conf import settings
 
 CAREGORY_CHOICES = (
     ('01','Personalized'),
-    ('02','Toys&Gifts'),
+    ('02','ToysGifts'),
     ('03','Stationary')
 )
 

@@ -15,8 +15,11 @@ def productDetail(request, id):
     context = {'product' : Product.objects.get(productId = id)}
     return render(request,'product-detail.html',context)
 
-def productsList(request):
-    print(Product.get_category_products("Toys&Gifts"))
-    return render(request,'product.html')
+def productsList(request,cat):
+    context = {'products' : Product.objects.all(),
+                'category': cat}
+
+    return render(request, 'product.html', context)
+    
 
 

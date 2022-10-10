@@ -39,7 +39,9 @@
 </head>
 
 <body>
-	<header>
+	<!-- To be modified to in the home page  -->
+	<header  class="header-v4" > 
+	
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
@@ -87,15 +89,15 @@
 
 
 							<li class="label1" data-label1="hot">
-								<a href="{% url 'product' %}">Personalized</a>
+								<a href="{% url 'product' 'Personalized' %}">Personalized</a>
 							</li>
 
 							<li>
-								<a href="shoping-cart.html">Toys&Gifts</a>
+								<a href="{% url 'product' 'ToysGifts' %}">Toys&Gifts</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Stationary</a>
+								<a href="{% url 'product' 'Stationary' %}">Stationary</a>
 							</li>
 
 							<li>
@@ -192,15 +194,15 @@
 
 
 				<li>
-					<a href="{% url 'product' %}" class="label1 rs1" data-label1="hot">Personalized</a>
+					<a href="{% url 'product' 'Personalized' %}" class="label1 rs1" data-label1="hot">Personalized</a>
 				</li>
 
 				<li>
-					<a href="shoping-cart.html">Toys&Gifts</a>
+					<a href="{% url 'product' 'ToysGifts' %}">Toys&Gifts</a>
 				</li>
 
 				<li>
-					<a href="blog.html">Stationary</a>
+					<a href="{% url 'product' 'Stationary' %}">Stationary</a>
 				</li>
 
 				<li>
