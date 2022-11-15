@@ -242,7 +242,7 @@ def PlaceOrder(request,address):
                         'category' : b.product.category,
                         'prod_id':b.id,
                         'prod_name':b.product.productName,
-                        "prod_dec": b.product.productDesc,
+                        "prod_dec": b.product.short_Description,
                         'quantity':b.quantity,
                         'price':b.product.price,
                         "subtotal": b.product.price * b.quantity
