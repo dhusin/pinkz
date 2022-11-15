@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+{% if orders.count != 0%}
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" > <!-- style="background-image: url('../images/bg-01.jpg');" -->
+    <h2 class="ltext-105 cl0 txt-center" style="color: 'black';">
+        Your Orders
+    </h2>
+</section>
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <h3>Previous Orders</h3>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Order ID</th>
+                        <th>Amount</th>
+                        <th>Ordered on</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ord in orders %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>#PINKZ-{{ord.id}}-ORD</td>
+                        <td>{{ord.total}}</td>
+                        <td>{{ord.created_at|timesince}} ago</td>
+                        <td>{{ord.order_status}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%else%}
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" > <!-- style="background-image: url('../images/bg-01.jpg');" -->
+    <h2 class="ltext-105 cl0 txt-center" style="color: 'black';">
+        No orders Found
+    </h2><br>
+    <h4 class="txt-center" >
+        Looks like You haven't made your orders yet :(
+    </h4>
+</section>
+{%endif%}
+{% endblock %}

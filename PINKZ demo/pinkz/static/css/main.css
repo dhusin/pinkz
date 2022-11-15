@@ -2369,6 +2369,7 @@ input.num-product::-webkit-inner-spin-button {
   font-family: Poppins-Bold;
   font-size: 50px;
   line-height: 1.1;
+  color : black;
 }
 
 .ltext-106 {
@@ -2797,9 +2798,10 @@ input.num-product::-webkit-inner-spin-button {
 .plh4::-moz-placeholder { color: #888;}
 .plh4:-ms-input-placeholder { color: #888;}
 
+
 /*---------------------------------------------*/
 .js-addedwish-detail {
-  color: #6c7ae0;
+  color: #e06c9c;
 }
 
 /*---------------------------------------------*/
@@ -2863,6 +2865,8 @@ input.num-product::-webkit-inner-spin-button {
 .input1:focus + .focus-input1 {
   width: 100%;
 }
+
+
 
 
 /*---------------------------------------------*/

@@ -195,6 +195,44 @@
     /*==================================================================
     [ Cart ]*/
     $('.js-show-cart').on('click',function(){
+        // ajax call
+        var url = "http://127.0.0.1:8000/";
+        $.ajax({
+            method: "GET",
+            url: url+"mini_cart_view",
+            success: function(response){
+                if (response["products"].length == 0)
+                {
+                    $(".js-panel-cart").find("#cart_header").html("Your cart is empty")
+                } 
+                else{
+                    let i;
+                    $('.js-panel-cart').find(".cart_list").remove()
+                    for(i = 0; i < response["products"].length;i++){
+                        let prod_name = response["products"][i]["prod_name"];
+
+                        $(".js-panel-cart").find(".cart_mini_display").append(`<li class="header-cart-item flex-w flex-t m-b-12 cart_list">
+						<div class="header-cart-item-img">
+							<img src="/media/${response["products"][i]["prod_img"]}" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            ${prod_name}
+							</a>
+
+							<span class="header-cart-item-info">
+								${response["products"][i]["quantity"]} x ₹${response["products"][i]["price"]}
+							</span>
+						</div>
+					</li>`)
+                    }
+                }
+                $(".js-panel-cart").find(".header-cart-total").html("Total: ₹"+response['total'])
+                
+            }
+                
+        });
         $('.js-panel-cart').addClass('show-header-cart');
     });
 
@@ -217,11 +255,33 @@
     $('.btn-num-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(numProduct - 1);
+        var url = "http://127.0.0.1:8000/";
+        var p_id = $(this).attr("p_id")    
+        console.log(p_id)
+        $.ajax({
+            method: "GET",
+            url: url+"manage_cart/"+p_id+"?action=dcr",
+            success: function(response){
+                location. reload()
+            }
+        });
+        
     });
 
     $('.btn-num-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
+        var url = "http://127.0.0.1:8000/";
+        var p_id = $(this).attr("p_id") 
+        $.ajax({
+            method: "GET",
+            url: url+"manage_cart/"+p_id+"?action=inc",
+            async: true,
+            success: function(response){
+                location. reload()
+            }
+        });
+        
     });
 
     /*==================================================================
@@ -265,12 +325,57 @@
             }
         });
     });
+
+    $(".post-comment").on('click',function(e){
+        e.preventDefault();
+        
+        if(String($("#review").val())=="" || $(".dis-none").val()==0){
+            $("#review").css("border","2px solid red")
+        }
+        else{
+            $("#review").css("border","1px solid #e6e6e6")
+            $.ajax({
+                method:"GET",
+                data : {
+                    "comment": String($("#review").val()),
+                    "ratings": $(".dis-none").val(),
+                    'id': $(this).attr("data-id")
+                },
+                url : "http://127.0.0.1:8000/add_comment",
+                success : function(response){
+                    location.reload()
+                }       
+            });
+    }
+    });
     
     /*==================================================================
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
+        var img_url
+        var id = $(this).attr("productdesc");
+        var url = "http://127.0.0.1:8000/";
+        // console.log(id)
+        $.ajax({
+            method: "GET",
+            url: url+'quickViewDetails/'+id,
+            success: function(response){
+                img_url = response[0].fields.image
+                $('.js-modal1').find('.prod_name').html(response[0].fields.productName) 
+                $('.js-modal1').find('.prod_price').html(response[0].fields.price) 
+                $('.js-modal1').find('.prod_desc').html(response[0].fields.productDesc) 
+                $('.js-modal1').find('.prod_img').attr('src',"/media/"+img_url)
+                $('.js-modal1').find('.thubnail').attr('data-thumb',"/media/"+img_url)
+                $('.js-modal1').find('.expand').attr('href',"/media/"+img_url)
+                $('.js-modal1').find('.cartbutton').attr('data-id',id)
+                $('.js-modal1').find('.heartbutton').attr('data-id',id)
+            }
+                
+        });
+        
         $('.js-modal1').addClass('show-modal1');
+        
     });
 
     $('.js-hide-modal1').on('click',function(){
